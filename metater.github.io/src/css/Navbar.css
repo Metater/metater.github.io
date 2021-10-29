@@ -1,0 +1,23 @@
+.Navbar {
+    position: fixed;
+    right: 5px;
+    top: 10px;
+    float: right;
+    display: flex;
+    font-size: 25px;
+    margin-right: 25px;
+    text-decoration: inherit;
+    justify-content: space-between;
+}
+
+span {
+    justify-content: space-between;
+    margin-left: 25px;
+}
+
+a, a:hover, a:focus, a:active, a:visited {
+    color:rgb(199, 18, 18);
+    text-decoration: none;
+}
+
+a:hover, a:active { text-decoration: none; color:rgb(196, 67, 67) }
