@@ -4,7 +4,8 @@ import {BitcoinPrice} from './API.js';
 function App() {
   return (
     <div>
-      Hello, World!
+      Hello, World! <br/>
+      Hola!
       <BitcoinPrice/>
     </div>
   );

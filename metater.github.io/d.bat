@@ -5,4 +5,4 @@ cd "E:\Projects\Visual Studio\metater.github.io" && git init
 cd "E:\Projects\Visual Studio\metater.github.io" && git add . 
 cd "E:\Projects\Visual Studio\metater.github.io" && git status
 cd "E:\Projects\Visual Studio\metater.github.io" && git commit -m 'Deployed pages folder docs'
-cd "E:\Projects\Visual Studio\metater.github.io" && git push -u origin master
+cd "E:\Projects\Visual Studio\metater.github.io" && git push
