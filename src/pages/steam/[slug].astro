@@ -48,7 +48,7 @@ const gameData = {
         <div>
           <p class="lead">{data.overview}</p>
           <dl class="game-detail-facts">
-            <div><dt>Developer</dt><dd>{data.developer}</dd></div>
+            <div><dt>{data.developer.includes(',') ? 'Developers' : 'Developer'}</dt><dd>{data.developer}</dd></div>
             <div><dt>Publisher</dt><dd>{data.publisher}</dd></div>
             <div><dt>Studio</dt><dd>{data.studio}</dd></div>
             <div><dt>Release</dt><dd>{data.releaseDate}</dd></div>

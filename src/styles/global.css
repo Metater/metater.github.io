@@ -251,9 +251,9 @@ p { color: var(--muted); }
 .game-list { display: grid; gap: clamp(3rem, 8vw, 7rem); }
 .game-feature { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
 .game-feature:nth-child(even) .game-feature__image { order: 2; }
-.game-feature__image { position: relative; border: 1px solid var(--border); background: var(--surface); }
+.game-feature__image { position: relative; border: 1px solid var(--border); background: radial-gradient(circle at 50% 50%, #69f58b17, transparent 58%), var(--surface-raised); display: grid; place-items: center; padding: clamp(1.5rem, 4vw, 2.5rem); }
 .game-feature__image::before { position: absolute; z-index: -1; inset: 14px -14px -14px 14px; border: 1px solid var(--border-soft); content: ''; }
-.game-feature__image img { width: 100%; aspect-ratio: 616 / 353; object-fit: cover; transition: filter .2s ease, transform .3s ease; }
+.game-feature__image img { width: 100%; aspect-ratio: 616 / 353; object-fit: contain; transition: filter .2s ease, transform .3s ease; }
 .game-feature__image:hover img { filter: saturate(1.08); transform: scale(1.01); }
 .game-feature__title { text-decoration: none; }
 .game-feature__title:hover { color: var(--accent); }

@@ -27,7 +27,7 @@ const structuredData = games.map((game) => ({
         </div>
         <aside class="hero__aside">
           <span class="meta-label">Catalog</span>
-          <p>Airport Security Sucks! and IM LOOPY FOR DOOP LOOPS!!! were made under Jatater Worldwide, the studio run by Connor Myers / Metater and JakeHub.</p>
+          <p>Airport Security Sucks! and IM LOOPY FOR DOOP LOOPS!!! were made under Jatater Worldwide, the studio run by Connor Myers (Metater) and JakeHub.</p>
           <p>Turkey Bois is currently on hold with no announced release date.</p>
         </aside>
       </div>
@@ -45,7 +45,7 @@ const structuredData = games.map((game) => ({
             <p class="lead">{game.data.summary}</p>
             <div class="game-feature__facts">
               <div><span>Release</span><strong>{game.data.releaseDate}</strong></div>
-              <div><span>Developer</span><strong>{game.data.developer}</strong></div>
+              <div><span>{game.data.developer.includes(',') ? 'Developers' : 'Developer'}</span><strong>{game.data.developer}</strong></div>
               <div><span>Publisher</span><strong>{game.data.publisher}</strong></div>
               <div><span>Credit</span><strong>{game.data.roles[0]}</strong></div>
             </div>
