@@ -65,6 +65,28 @@ const features = [
     </div>
   </section>
 
+  <section class="section" id="adopters">
+    <div class="shell">
+      <div class="section-heading">
+        <div><span class="section-number">03 / In use</span><h2 class="section-title">Selected games and projects.</h2></div>
+        <p>Publicly known examples—not an exhaustive customer list. Embedded game assemblies make many integrations difficult to discover.</p>
+      </div>
+      <div class="adopter-grid">
+        {adopters.map((adopter) => (
+          <a class:list={['adopter-card', adopter.data.type === 'open-source' && 'adopter-card--opensource']} href={adopter.data.url}>
+            {adopter.data.image && <div class:list={['adopter-card__image', adopter.data.type === 'open-source' && 'adopter-card__image--contain']}><img src={adopter.data.image} alt={adopter.data.imageAlt ?? ''} width="616" height="353" loading="lazy" /></div>}
+            <div class="adopter-card__body">
+              {adopter.data.reach && <span class="adopter-card__reach">{adopter.data.reach}</span>}
+              <h3>{adopter.data.title}</h3>
+              <p>{adopter.data.relationship}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      <p class="callout">Reach figures are rounded, creator-supplied snapshots as of July 2026. Follow each title for its current public information.</p>
+    </div>
+  </section>
+
   <section class="section">
     <div class="shell">
       <div class="section-heading">
@@ -92,28 +114,6 @@ const features = [
       <div class="integration-strip" aria-label="Supported networking integrations">
         <span>Mirror</span><span>FishNet</span><span>Netcode for GameObjects</span><span>Netick</span>
       </div>
-    </div>
-  </section>
-
-  <section class="section" id="adopters">
-    <div class="shell">
-      <div class="section-heading">
-        <div><span class="section-number">03 / In use</span><h2 class="section-title">Selected games and projects.</h2></div>
-        <p>Publicly known examples—not an exhaustive customer list. Embedded game assemblies make many integrations difficult to discover.</p>
-      </div>
-      <div class="adopter-grid">
-        {adopters.map((adopter) => (
-          <a class:list={['adopter-card', adopter.data.type === 'open-source' && 'adopter-card--opensource']} href={adopter.data.url}>
-            {adopter.data.image && <div class:list={['adopter-card__image', adopter.data.type === 'open-source' && 'adopter-card__image--contain']}><img src={adopter.data.image} alt={adopter.data.imageAlt ?? ''} width="616" height="353" loading="lazy" /></div>}
-            <div class="adopter-card__body">
-              {adopter.data.reach && <span class="adopter-card__reach">{adopter.data.reach}</span>}
-              <h3>{adopter.data.title}</h3>
-              <p>{adopter.data.relationship}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-      <p class="callout">Reach figures are rounded, creator-supplied snapshots as of July 2026. Follow each title for its current public information.</p>
     </div>
   </section>
 
