@@ -11,9 +11,11 @@
   "imageAlt": "Airport Security Sucks! Steam capsule artwork",
   "technologies": ["Unity", "Multiplayer", "Voice control", "MetaVoiceChat"],
   "metrics": [
+    { "value": "50M+", "label": "social media impressions worldwide", "asOf": "July 2026", "note": "Creator-supplied aggregate social reach figure." },
+    { "value": "150K", "label": "full-game player-hours", "asOf": "July 2026", "note": "Creator-supplied playtime figure." },
+    { "value": "1.23M", "label": "demo player-hours", "asOf": "July 2026", "note": "Creator-supplied playtime figure." },
     { "value": "70K+", "label": "full-game players", "asOf": "July 2026", "sourceUrl": "https://store.steampowered.com/app/4285690/", "note": "Creator-supplied reach figure." },
     { "value": "782K+", "label": "demo players", "asOf": "July 2026", "sourceUrl": "https://store.steampowered.com/app/4362800/Airport_Security_Sucks_Demo/", "note": "Creator-supplied reach figure." }
   ],
   "order": 1
 }
-
