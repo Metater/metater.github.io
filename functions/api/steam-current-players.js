@@ -2,7 +2,9 @@ const STEAM_ENDPOINT = 'https://api.steampowered.com/ISteamUserStats/GetNumberOf
 const ALLOWED_ORIGINS = new Set([
   'https://metater.net',
   'https://www.metater.net',
-  'https://metater.github.io'
+  'https://metater.github.io',
+  'http://localhost:4321',
+  'http://127.0.0.1:4321'
 ]);
 
 function corsHeaders(origin) {

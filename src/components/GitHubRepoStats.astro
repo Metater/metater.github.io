@@ -1,0 +1,46 @@
+<section class="repo-pulse" id="repository" aria-labelledby="repo-pulse-title" data-github-repo>
+  <div class="shell repo-pulse__grid">
+    <div>
+      <span class="kicker">Public repository</span>
+      <h2 id="repo-pulse-title">Built in the open.</h2>
+      <p class="lead" data-repo-description>Self-contained proximity voice chat solution for Unity with easy setup and support for many networking libraries. Not affiliated with Meta Platforms, Inc!</p>
+      <a class="button button--quiet" href="https://github.com/Metater/MetaVoiceChat">Explore the repository</a>
+    </div>
+    <div>
+      <div class="repo-pulse__metrics" aria-live="polite">
+        <div><strong data-repo-stars>176</strong><span>GitHub stars</span></div>
+        <div><strong data-repo-forks>20</strong><span>Forks</span></div>
+        <div><strong data-repo-contributors>8</strong><span>Contributors</span></div>
+      </div>
+      <p class="repo-pulse__status" data-repo-status>Refreshing from the public GitHub API…</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const repoPanel = document.querySelector('[data-github-repo]');
+  if (repoPanel) {
+    const setText = (selector: string, text: string) => {
+      const element = repoPanel.querySelector(selector);
+      if (element) element.textContent = text;
+    };
+    Promise.all([
+      fetch('https://api.github.com/repos/Metater/MetaVoiceChat', { headers: { Accept: 'application/vnd.github+json' } }),
+      fetch('https://api.github.com/repos/Metater/MetaVoiceChat/contributors?per_page=100&anon=true', { headers: { Accept: 'application/vnd.github+json' } })
+    ])
+      .then(async ([repoResponse, contributorsResponse]) => {
+        if (!repoResponse.ok || !contributorsResponse.ok) throw new Error('GitHub API unavailable');
+        return [await repoResponse.json(), await contributorsResponse.json()];
+      })
+      .then(([repo, contributors]) => {
+        if (typeof repo.description === 'string') setText('[data-repo-description]', repo.description);
+        if (Number.isInteger(repo.stargazers_count)) setText('[data-repo-stars]', new Intl.NumberFormat().format(repo.stargazers_count));
+        if (Number.isInteger(repo.forks_count)) setText('[data-repo-forks]', new Intl.NumberFormat().format(repo.forks_count));
+        if (Array.isArray(contributors)) setText('[data-repo-contributors]', new Intl.NumberFormat().format(contributors.length));
+        setText('[data-repo-status]', 'Live repository data from GitHub');
+      })
+      .catch(() => {
+        setText('[data-repo-status]', 'Public snapshot shown · live refresh unavailable');
+      });
+  }
+</script>

@@ -8,9 +8,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <div>
         <div class="hero__eyebrow"><span class="kicker">Contact</span><span>Connor Myers</span></div>
         <h1>Start with the work.</h1>
-        <p class="lead">For collaboration, technical questions, or support, use the channel closest to what you are building.</p>
+        <p class="lead">For project work, technical questions, or support, use the channel closest to what you are building.</p>
       </div>
       <div class="contact-links">
+        <a class="contact-link contact-link--support" href="https://ko-fi.com/metater"><strong>Support on Ko-fi</strong><span>Fuel the next build ↗</span></a>
         <a class="contact-link" href="https://github.com/Metater"><strong>GitHub</strong><span>Code & public projects ↗</span></a>
         <a class="contact-link" href="https://discord.gg/k4ZtGAA2Nt"><strong>Discord</strong><span>MetaVoiceChat support ↗</span></a>
         <a class="contact-link" href="https://store.steampowered.com/app/4285690/"><strong>Steam</strong><span>Released games ↗</span></a>
@@ -18,10 +19,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     </div>
   </section>
   <section class="section section--tight">
+    <div class="shell kofi-panel">
+      <div><span class="section-number">01 / Support the work</span><h2>Help make room for the next strange project.</h2></div>
+      <div><p class="lead">Ko-fi is the direct way to support my games, open-source tools, and technical experiments.</p><a class="button button--primary" href="https://ko-fi.com/metater">Visit ko-fi.com/metater ↗</a></div>
+    </div>
+  </section>
+  <section class="section section--tight">
     <div class="shell contact-grid">
-      <div><span class="section-number">01 / Best route</span><h2>Clear context gets a better answer.</h2></div>
+      <div><span class="section-number">02 / Best route</span><h2>Clear context gets a better answer.</h2></div>
       <div><p>For MetaVoiceChat support, post in the support channel and include your Unity version, networking provider, package version, and relevant logs. For development conversations, link the project or describe the constraint you are trying to solve.</p><p class="callout">A public business email and downloadable résumé can be added here when approved.</p></div>
     </div>
   </section>
 </BaseLayout>
-

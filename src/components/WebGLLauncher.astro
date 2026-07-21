@@ -2,7 +2,6 @@
 interface DemoConfig {
   id: string;
   shellUrl: string;
-  externalUrl: string;
   download: string;
   aspectRatio: string;
   mobilePolicy: 'supported' | 'warn' | 'fallback';
@@ -47,7 +46,6 @@ const allow = demo.permissions.join('; ');
       </div>
       <div class="button-row">
         <button class="button button--primary" type="button" data-demo-launch>Launch interactive demo</button>
-        <a class="button button--quiet" href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
       </div>
     </div>
   </div>
@@ -60,17 +58,15 @@ const allow = demo.permissions.join('; ');
       </div>
       <div class="demo-stage__actions">
         <button type="button" data-demo-fullscreen>Fullscreen</button>
-        <a href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
         <button type="button" data-demo-unload>Return to project</button>
       </div>
     </div>
     <div class="demo-stage__frame" data-demo-frame></div>
     <div class="demo-error" data-demo-error hidden>
       <strong>The interactive demo could not finish loading.</strong>
-      <p>Check your connection, try again, or open the standalone version in a new tab.</p>
+      <p>Check your connection and try again.</p>
       <div class="button-row">
         <button class="button button--primary" type="button" data-demo-retry>Try again</button>
-        <a class="button button--quiet" href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
       </div>
     </div>
   </div>

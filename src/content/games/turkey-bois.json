@@ -1,16 +1,32 @@
 {
   "title": "Turkey Bois",
   "summary": "A cooperative arena shooter built around shotgun-powered flight, procedural maps, proximity chat, and feeding a very hungry pilgrim.",
-  "status": "Coming soon",
-  "releaseDate": "To be announced",
+  "status": "On hold",
+  "releaseDate": "No release date",
   "developer": "Metater",
   "publisher": "Metater",
   "roles": ["Developer and publisher — Metater", "Game systems", "Online co-op"],
   "steamUrl": "https://store.steampowered.com/app/3038690/Turkey_Bois/",
   "image": "/media/steam/turkey-bois.jpg",
   "imageAlt": "Turkey Bois Steam header artwork",
+  "tagline": "Shotgun-powered flight, procedural forests, and one pilgrim who is never full.",
+  "overview": "Turkey Bois is a cooperative arena shooter where recoil is movement, the map changes between runs, and feeding the pilgrim means surviving a forest full of armed turkeys together.",
+  "studio": "Metater",
+  "studioNote": "Turkey Bois is currently on hold. If development resumes, it would continue as a shared project with a friend rather than as a solo release.",
+  "heroImage": "/media/steam/turkey-bois/hero.webp",
+  "heroImageAlt": "A low-poly forest and mountain landscape at sunset",
+  "gallery": [
+    { "src": "/media/steam/turkey-bois/screenshot-1.webp", "alt": "A turkey being launched through the forest by a shotgun blast" },
+    { "src": "/media/steam/turkey-bois/screenshot-2.webp", "alt": "A pilgrim turkey character beneath a bright blue sky" },
+    { "src": "/media/steam/turkey-bois/screenshot-3.webp", "alt": "Shotgun trails converging through a sunset forest" }
+  ],
+  "highlights": [
+    { "title": "Recoil is traversal", "description": "Every shotgun blast doubles as movement, turning combat into aerial routing and recovery." },
+    { "title": "Procedural runs", "description": "Changing forest layouts keep navigation, enemy pressure, and co-op decisions fresh." },
+    { "title": "Proximity voice", "description": "Spatial communication keeps a scattered team connected without flattening the sense of distance." },
+    { "title": "Connected systems design", "description": "The project brings networking, procedural generation, movement, and combat into one deliberately strange loop." }
+  ],
   "technologies": ["Unity", "Online co-op", "Procedural generation", "Proximity chat"],
   "metrics": [],
   "order": 3
 }
-

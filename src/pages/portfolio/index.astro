@@ -22,14 +22,14 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="project-grid">
     <div class="shell">
       <div class="media-card-grid">
         {projects.map((project) => {
           const href = project.data.customPath ?? `/portfolio/${project.id}/`;
           return (
             <article class="media-card">
-              {project.data.image && <div class="media-card__image"><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>}
+              {project.data.image && <div class:list={['media-card__image', project.id === 'metavoicechat' && 'media-card__image--contain']}><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>}
               <div class="media-card__body">
                 <div class="media-card__meta"><span>{project.data.eyebrow}</span><span>0{project.data.order}</span></div>
                 <h2 style="font-size: clamp(1.7rem, 3vw, 2.7rem)"><a href={href}>{project.data.title}</a></h2>
@@ -44,4 +44,3 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     </div>
   </section>
 </BaseLayout>
-

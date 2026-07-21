@@ -1,4 +1,15 @@
-const routes = ['/', '/metavoicechat/', '/steam/', '/portfolio/', '/portfolio/metafizzysteamworks/', '/portfolio/hypercone-visualizer/', '/contact/'];
+const routes = [
+  '/',
+  '/metavoicechat/',
+  '/steam/',
+  '/steam/airport-security-sucks/',
+  '/steam/doop-loops/',
+  '/steam/turkey-bois/',
+  '/portfolio/',
+  '/portfolio/metafizzysteamworks/',
+  '/portfolio/hypercone-visualizer/',
+  '/contact/'
+];
 
 export function GET() {
   const urls = routes.map((route) => `<url><loc>https://metater.net${route}</loc></url>`).join('');

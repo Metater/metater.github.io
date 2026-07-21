@@ -9,6 +9,23 @@
   "steamUrl": "https://store.steampowered.com/app/4285690/",
   "image": "/media/steam/airport-security.jpg",
   "imageAlt": "Airport Security Sucks! Steam capsule artwork",
+  "tagline": "Run airport security. Find the contraband. Try not to level the terminal.",
+  "overview": "Airport Security Sucks! turns the checkpoint into a loud multiplayer sandbox. Security officers inspect, interrogate, and control a crowd of suspicious travelers while smugglers improvise increasingly ridiculous ways through the line.",
+  "studio": "Jatater Worldwide",
+  "studioNote": "Airport Security Sucks! was made under Jatater Worldwide, the game studio run by Connor Myers / Metater and JakeHub.",
+  "heroImage": "/media/steam/airport-security-sucks/hero.webp",
+  "heroImageAlt": "A busy airport security checkpoint viewed from above",
+  "gallery": [
+    { "src": "/media/steam/airport-security-sucks/screenshot-1.webp", "alt": "A security officer facing an explosion in the airport terminal" },
+    { "src": "/media/steam/airport-security-sucks/screenshot-2.webp", "alt": "First-person security gameplay during an explosive terminal incident" },
+    { "src": "/media/steam/airport-security-sucks/screenshot-3.webp", "alt": "Players searching an airplane cabin for contraband" }
+  ],
+  "highlights": [
+    { "title": "Asymmetric multiplayer", "description": "Security officers control the checkpoint while smugglers hide contraband, bluff, and exploit the chaos." },
+    { "title": "Voice-driven control", "description": "Spoken interactions and proximity voice make every inspection feel immediate, social, and unpredictable." },
+    { "title": "Systemic comedy", "description": "Crowds, gadgets, physics, weapons, and player decisions combine into stories the game never had to script." },
+    { "title": "Built to scale", "description": "The shipped game connects multiplayer infrastructure with a heavily simulated terminal full of moving parts." }
+  ],
   "technologies": ["Unity", "Multiplayer", "Voice control", "MetaVoiceChat"],
   "metrics": [
     { "value": "50M+", "label": "social media impressions worldwide", "asOf": "July 2026", "note": "Creator-supplied aggregate social reach figure." },

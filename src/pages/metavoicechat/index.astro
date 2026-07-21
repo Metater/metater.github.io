@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import GitHubRepoStats from '../../components/GitHubRepoStats.astro';
 
 const adopters = (await getCollection('adopters')).sort((a, b) => a.data.order - b.data.order);
 const productData = {
@@ -48,6 +49,8 @@ const features = [
     </div>
   </section>
 
+  <GitHubRepoStats />
+
   <section class="proof-band" aria-labelledby="mvc-reach">
     <div class="shell proof-band__inner">
       <div class="proof-band__metric">
@@ -92,7 +95,7 @@ const features = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="adopters">
     <div class="shell">
       <div class="section-heading">
         <div><span class="section-number">03 / In use</span><h2 class="section-title">Selected games and projects.</h2></div>
@@ -101,7 +104,7 @@ const features = [
       <div class="adopter-grid">
         {adopters.map((adopter) => (
           <a class:list={['adopter-card', adopter.data.type === 'open-source' && 'adopter-card--opensource']} href={adopter.data.url}>
-            {adopter.data.image && <div class="adopter-card__image"><img src={adopter.data.image} alt={adopter.data.imageAlt ?? ''} width="616" height="353" loading="lazy" /></div>}
+            {adopter.data.image && <div class:list={['adopter-card__image', adopter.data.type === 'open-source' && 'adopter-card__image--contain']}><img src={adopter.data.image} alt={adopter.data.imageAlt ?? ''} width="616" height="353" loading="lazy" /></div>}
             <div class="adopter-card__body">
               {adopter.data.reach && <span class="adopter-card__reach">{adopter.data.reach}</span>}
               <h3>{adopter.data.title}</h3>
@@ -135,4 +138,3 @@ const features = [
     </div>
   </section>
 </BaseLayout>
-

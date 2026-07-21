@@ -2,7 +2,10 @@
   "title": "MirrorVR",
   "type": "open-source",
   "url": "https://github.com/CodedImmersions/MirrorVR",
+  "image": "/media/projects/mirrorvr.png",
+  "imageAlt": "MirrorVR logo",
   "relationship": "Open-source Unity VR framework that credits MetaVoiceChat",
+  "reach": "1,000+ developers",
   "sourceNote": "Usage is documented publicly by the project.",
   "asOf": "July 2026",
   "order": 5

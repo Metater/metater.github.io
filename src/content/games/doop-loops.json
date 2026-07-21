@@ -5,12 +5,28 @@
   "releaseDate": "December 3, 2025",
   "developer": "JakeHub, Metater",
   "publisher": "Jatater Worldwide",
-  "roles": ["Developer credit — Metater", "Gameplay development", "Production collaboration"],
+  "roles": ["Developer credit — Metater", "Gameplay development", "Production and launch"],
   "steamUrl": "https://store.steampowered.com/app/2953840/IM_LOOPY_FOR_DOOP_LOOPS/",
   "image": "/media/steam/doop-loops.jpg",
   "imageAlt": "IM LOOPY FOR DOOP LOOPS!!! Steam header artwork",
+  "tagline": "An all-out grocery-store rampage starring one dangerously hungry cereal mascot.",
+  "overview": "IM LOOPY FOR DOOP LOOPS!!! is a compact arcade action adventure built around speed, grabbing, throwing, and a supermarket that rapidly stops resembling a place of business.",
+  "studio": "Jatater Worldwide",
+  "studioNote": "IM LOOPY FOR DOOP LOOPS!!! was made under Jatater Worldwide, the game studio run by Connor Myers / Metater and JakeHub.",
+  "heroImage": "/media/steam/doop-loops/hero.webp",
+  "heroImageAlt": "A supermarket arena filled with cereal and roaming enemies",
+  "gallery": [
+    { "src": "/media/steam/doop-loops/screenshot-1.webp", "alt": "The player throwing groceries during a bright supermarket explosion" },
+    { "src": "/media/steam/doop-loops/screenshot-2.webp", "alt": "Fast first-person combat against supermarket enemies" },
+    { "src": "/media/steam/doop-loops/screenshot-3.webp", "alt": "The blue cereal mascot standing beneath a suspended enemy" }
+  ],
+  "highlights": [
+    { "title": "Grab everything", "description": "Shelves, groceries, props, and enemies become part of a fast physical combat loop." },
+    { "title": "Arcade momentum", "description": "Short objectives and escalating encounters keep the game moving instead of pausing for exposition." },
+    { "title": "Readable chaos", "description": "Strong silhouettes, bright effects, and a simple input language keep the action legible at full speed." },
+    { "title": "Focused release", "description": "A compact game shaped under Jatater Worldwide from production through launch." }
+  ],
   "technologies": ["Unity", "Action adventure", "Steam"],
   "metrics": [],
   "order": 2
 }
-

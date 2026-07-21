@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SteamPlayerCount from '../../components/SteamPlayerCount.astro';
 
 const games = (await getCollection('games')).sort((a, b) => a.data.order - b.data.order);
 const structuredData = games.map((game) => ({
@@ -22,12 +23,12 @@ const structuredData = games.map((game) => ({
       <div class="hero__grid">
         <div>
           <h1>Games built around one strong, strange idea.</h1>
-          <p class="lead">Released collaborations and independent experiments in multiplayer systems, physical comedy, voice interaction, and controlled chaos.</p>
+          <p class="lead">Three games shaped by multiplayer systems, physical comedy, voice interaction, and controlled chaos.</p>
         </div>
         <aside class="hero__aside">
           <span class="meta-label">Catalog</span>
-          <p>Three titles. Two released collaborations. One independent project in development.</p>
-          <p>Each listing links to its authoritative Steam page.</p>
+          <p>Airport Security Sucks! and IM LOOPY FOR DOOP LOOPS!!! were made under Jatater Worldwide, the studio run by Connor Myers / Metater and JakeHub.</p>
+          <p>Turkey Bois is currently on hold with no announced release date.</p>
         </aside>
       </div>
     </div>
@@ -37,10 +38,10 @@ const structuredData = games.map((game) => ({
     <div class="shell game-list">
       {games.map((game, index) => (
         <article class="game-feature">
-          <div class="game-feature__image"><img src={game.data.image} alt={game.data.imageAlt} width="616" height="353" loading={index === 0 ? 'eager' : 'lazy'} /></div>
+          <a class="game-feature__image" href={`/steam/${game.id}/`} aria-label={`Explore ${game.data.title}`}><img src={game.data.image} alt={game.data.imageAlt} width="1232" height="706" loading={index === 0 ? 'eager' : 'lazy'} /></a>
           <div>
             <span class="section-number">0{index + 1} / {game.data.status}</span>
-            <h2>{game.data.title}</h2>
+            <h2><a class="game-feature__title" href={`/steam/${game.id}/`}>{game.data.title}</a></h2>
             <p class="lead">{game.data.summary}</p>
             <div class="game-feature__facts">
               <div><span>Release</span><strong>{game.data.releaseDate}</strong></div>
@@ -51,52 +52,17 @@ const structuredData = games.map((game) => ({
             {game.data.metrics.length > 0 && (
               <div class="metric-row">
                 {game.id === 'airport-security-sucks' && (
-                  <div class="metric-row__item" data-steam-player-count aria-live="polite">
-                    <strong data-steam-player-count-value>—</strong>
-                    <span data-steam-player-count-label>checking players online now</span>
-                  </div>
+                  <SteamPlayerCount />
                 )}
                 {game.data.metrics.map((metric) => <div class="metric-row__item"><strong>{metric.value}</strong><span>{metric.label} · {metric.asOf}</span></div>)}
               </div>
             )}
             <ul class="tag-list">{game.data.technologies.map((item) => <li>{item}</li>)}</ul>
-            <div class="button-row"><a class="button button--primary" href={game.data.steamUrl}>View on Steam</a></div>
+            <div class="button-row"><a class="button button--primary" href={`/steam/${game.id}/`}>Explore the game</a><a class="button button--quiet" href={game.data.steamUrl}>View on Steam</a></div>
           </div>
         </article>
       ))}
     </div>
   </section>
 
-  <script>
-    const counter = document.querySelector('[data-steam-player-count]');
-    if (counter) {
-      const value = counter.querySelector('[data-steam-player-count-value]');
-      const label = counter.querySelector('[data-steam-player-count-label]');
-      const canonicalHosts = new Set(['metater.net', 'www.metater.net']);
-      const endpoint = canonicalHosts.has(window.location.hostname)
-        ? '/api/steam-current-players'
-        : 'https://metater.net/api/steam-current-players';
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 8000);
-
-      fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
-        .then((response) => {
-          if (!response.ok) throw new Error(`Player count returned ${response.status}`);
-          return response.json();
-        })
-        .then((data) => {
-          const count = data?.response?.player_count;
-          if (data?.response?.result !== 1 || !Number.isInteger(count) || count < 0) {
-            throw new Error('Invalid player count');
-          }
-          if (value) value.textContent = new Intl.NumberFormat().format(count);
-          if (label) label.textContent = count === 1 ? 'player online now · Steam live' : 'players online now · Steam live';
-        })
-        .catch(() => {
-          if (value) value.textContent = '—';
-          if (label) label.textContent = 'live player count unavailable';
-        })
-        .finally(() => window.clearTimeout(timeout));
-    }
-  </script>
 </BaseLayout>

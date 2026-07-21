@@ -1,0 +1,36 @@
+<div class="metric-row__item metric-row__item--live" data-steam-player-count aria-live="polite">
+  <strong data-steam-player-count-value>—</strong>
+  <span data-steam-player-count-label>checking players online now</span>
+</div>
+
+<script>
+  const counters = document.querySelectorAll('[data-steam-player-count]');
+  if (counters.length > 0) {
+    const endpoint = window.location.hostname === 'metater.github.io'
+      ? 'https://metater.net/api/steam-current-players'
+      : '/api/steam-current-players';
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 8000);
+
+    fetch(endpoint, { headers: { Accept: 'application/json' }, signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Player count returned ${response.status}`);
+        return response.json();
+      })
+      .then((data) => {
+        const count = data?.response?.player_count;
+        if (data?.response?.result !== 1 || !Number.isInteger(count) || count < 0) throw new Error('Invalid player count');
+        counters.forEach((counter) => {
+          const value = counter.querySelector('[data-steam-player-count-value]');
+          const label = counter.querySelector('[data-steam-player-count-label]');
+          if (value) value.textContent = new Intl.NumberFormat().format(count);
+          if (label) label.textContent = count === 1 ? 'player online now · Steam live' : 'players online now · Steam live';
+        });
+      })
+      .catch(() => counters.forEach((counter) => {
+        const label = counter.querySelector('[data-steam-player-count-label]');
+        if (label) label.textContent = 'live player count unavailable';
+      }))
+      .finally(() => window.clearTimeout(timeout));
+  }
+</script>

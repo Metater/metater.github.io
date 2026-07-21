@@ -22,7 +22,7 @@ const personData = {
 >
   <section class="hero">
     <div class="shell">
-      <div class="hero__eyebrow"><span class="kicker">Independent games & software</span><span>Connor Myers</span></div>
+      <div class="hero__eyebrow"><span class="kicker">Games & software</span><span>Connor Myers</span></div>
       <div class="hero__grid">
         <div>
           <h1 class="hero__title">Metater<span class="hero__name">Games with a technical point of view.</span></h1>
@@ -73,7 +73,7 @@ const personData = {
         <a class="path-card" href="/steam/">
           <span class="path-card__index">02 — Products</span>
           <h3>Steam games</h3>
-          <p>Released collaborations, experiments in progress, and multiplayer chaos.</p>
+          <p>Released games, projects on hold, and multiplayer chaos.</p>
         </a>
         <a class="path-card" href="/portfolio/">
           <span class="path-card__index">03 — Engineering</span>
@@ -84,7 +84,7 @@ const personData = {
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="selected-work">
     <div class="shell">
       <div class="section-heading">
         <div>
@@ -99,7 +99,7 @@ const personData = {
           return (
             <article class="media-card">
               {project.data.image && (
-                <div class="media-card__image"><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>
+                <div class:list={['media-card__image', project.id === 'metavoicechat' && 'media-card__image--contain']}><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>
               )}
               <div class="media-card__body">
                 <div class="media-card__meta"><span>{project.data.eyebrow}</span><span>0{project.data.order}</span></div>
@@ -123,9 +123,8 @@ const personData = {
       <div>
         <p class="lead">My work tends to begin where a game idea meets a difficult systems problem: networking, voice, simulation, tooling, or deployment.</p>
         <p>I care about the parts players feel and the infrastructure developers have to live with afterward.</p>
-        <a class="button button--quiet" href="/contact/">Contact Connor</a>
+        <div class="button-row"><a class="button button--quiet" href="/contact/">Contact Connor</a><a class="button button--primary" href="https://ko-fi.com/metater">Support on Ko-fi</a></div>
       </div>
     </div>
   </section>
 </BaseLayout>
-

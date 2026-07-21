@@ -13,7 +13,6 @@ const metric = z.object({
 const demo = z.object({
   id: z.string(),
   shellUrl: z.string(),
-  externalUrl: z.string(),
   download: z.string(),
   aspectRatio: z.string(),
   mobilePolicy: z.enum(['supported', 'warn', 'fallback']),
@@ -34,6 +33,14 @@ const games = defineCollection({
     steamUrl: z.url(),
     image: z.string(),
     imageAlt: z.string(),
+    tagline: z.string(),
+    overview: z.string(),
+    studio: z.string(),
+    studioNote: z.string(),
+    heroImage: z.string(),
+    heroImageAlt: z.string(),
+    gallery: z.array(z.object({ src: z.string(), alt: z.string() })),
+    highlights: z.array(z.object({ title: z.string(), description: z.string() })),
     technologies: z.array(z.string()),
     metrics: z.array(metric).default([]),
     order: z.number()
