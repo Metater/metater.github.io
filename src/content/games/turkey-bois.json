@@ -1,0 +1,16 @@
+{
+  "title": "Turkey Bois",
+  "summary": "A cooperative arena shooter built around shotgun-powered flight, procedural maps, proximity chat, and feeding a very hungry pilgrim.",
+  "status": "Coming soon",
+  "releaseDate": "To be announced",
+  "developer": "Metater",
+  "publisher": "Metater",
+  "roles": ["Developer and publisher — Metater", "Game systems", "Online co-op"],
+  "steamUrl": "https://store.steampowered.com/app/3038690/Turkey_Bois/",
+  "image": "/media/steam/turkey-bois.jpg",
+  "imageAlt": "Turkey Bois Steam header artwork",
+  "technologies": ["Unity", "Online co-op", "Procedural generation", "Proximity chat"],
+  "metrics": [],
+  "order": 3
+}
+

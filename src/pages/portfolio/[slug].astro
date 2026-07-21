@@ -1,0 +1,57 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WebGLLauncher from '../../components/WebGLLauncher.astro';
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection('projects', ({ data }) => !data.customPath);
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}) satisfies GetStaticPaths;
+
+interface Props { project: CollectionEntry<'projects'>; }
+const { project } = Astro.props;
+const data = project.data;
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <article>
+    <header class="case-hero">
+      <div class="shell">
+        <div class="case-hero__meta"><span>{data.eyebrow}</span><span>Case study</span><span>Connor Myers / Metater</span></div>
+        <h1>{data.title}</h1>
+        <p class="lead">{data.description}</p>
+        <div class="button-row">{data.links.map((link) => <a class="button button--quiet" href={link.url}>{link.label}</a>)}</div>
+        {data.image && <div class="case-hero__image"><img src={data.image} alt={data.imageAlt ?? ''} width="1200" height="630" /></div>}
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="shell case-grid">
+        <aside class="case-grid__aside">
+          <span class="meta-label">Technologies</span>
+          <ul>{data.technologies.map((item) => <li>{item}</li>)}</ul>
+        </aside>
+        <div class="case-grid__content">
+          <section><span class="section-number">01 / Challenge</span><h2>The problem</h2><p class="lead">{data.challenge}</p></section>
+          <section><span class="section-number">02 / Responsibility</span><h2>What I owned</h2><ul class="editorial-list">{data.responsibilities.map((item) => <li>{item}</li>)}</ul></section>
+          <section><span class="section-number">03 / Decisions</span><h2>Implementation choices</h2><ul class="editorial-list">{data.decisions.map((item) => <li>{item}</li>)}</ul></section>
+          <section><span class="section-number">04 / Outcomes</span><h2>What the structure enabled</h2><ul class="editorial-list">{data.outcomes.map((item) => <li>{item}</li>)}</ul></section>
+        </div>
+      </div>
+    </section>
+
+    {data.demo && (
+      <section class="section">
+        <div class="shell">
+          <div class="section-heading">
+            <div><span class="section-number">05 / Interactive</span><h2 class="section-title">Explore the experiment.</h2></div>
+            <p>The Unity runtime and build files remain completely unloaded until you choose to launch them.</p>
+          </div>
+          <WebGLLauncher title={data.title} description="Launch the real-time cosmological visualization directly inside this case study." demo={data.demo} />
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>
+

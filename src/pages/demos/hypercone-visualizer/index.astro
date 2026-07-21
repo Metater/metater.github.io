@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import WebGLLauncher from '../../../components/WebGLLauncher.astro';
+
+const demo = {
+  id: 'hypercone-visualizer',
+  shellUrl: '/hypercone-visualizer/index.html?embed=1',
+  externalUrl: '/hypercone-visualizer/',
+  download: 'approximately 42 MB',
+  aspectRatio: '8 / 5',
+  mobilePolicy: 'warn' as const,
+  permissions: ['fullscreen'],
+  fallbackDescription: 'Read the Hypercone Visualizer case study for a non-interactive description.'
+};
+---
+
+<BaseLayout title="Hypercone Visualizer Demo" description="Launch the Hypercone Visualizer Unity WebGL experiment on demand." noindex={true}>
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <div><span class="section-number">Interactive demo</span><h1 style="font-size: clamp(3rem, 8vw, 7rem)">Hypercone Visualizer</h1></div>
+        <div><p>This focused route keeps the approximately 42 MB Unity build out of the main site until launch.</p><a href="/portfolio/hypercone-visualizer/">Read the case study</a></div>
+      </div>
+      <WebGLLauncher title="Hypercone Visualizer" description="A real-time Unity visualization of a cosmological hypercone." demo={demo} />
+    </div>
+  </section>
+</BaseLayout>

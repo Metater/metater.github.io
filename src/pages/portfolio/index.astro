@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Portfolio" description="Selected Unity, networking, voice, WebGL, and developer-tool work by Connor Myers / Metater.">
+  <section class="hero">
+    <div class="shell">
+      <div class="hero__eyebrow"><span class="kicker">Technical and creative work</span><span>Selected portfolio</span></div>
+      <div class="hero__grid">
+        <div>
+          <h1>The systems behind the finished thing.</h1>
+          <p class="lead">A portfolio of multiplayer infrastructure, open-source tools, game engineering, and interactive experiments—organized around decisions and outcomes.</p>
+        </div>
+        <aside class="hero__aside">
+          <span class="meta-label">Focus</span>
+          <p>Unity, C#, networking, voice over IP, Steam integration, runtime performance, and Web deployment.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="media-card-grid">
+        {projects.map((project) => {
+          const href = project.data.customPath ?? `/portfolio/${project.id}/`;
+          return (
+            <article class="media-card">
+              {project.data.image && <div class="media-card__image"><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>}
+              <div class="media-card__body">
+                <div class="media-card__meta"><span>{project.data.eyebrow}</span><span>0{project.data.order}</span></div>
+                <h2 style="font-size: clamp(1.7rem, 3vw, 2.7rem)"><a href={href}>{project.data.title}</a></h2>
+                <p>{project.data.summary}</p>
+                <ul class="tag-list">{project.data.technologies.slice(0, 5).map((tag) => <li>{tag}</li>)}</ul>
+                <div class="button-row"><a class="button button--quiet" href={href}>View project</a></div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

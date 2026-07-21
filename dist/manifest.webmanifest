@@ -1,0 +1,12 @@
+{
+  "name": "Metater",
+  "short_name": "Metater",
+  "description": "Games, developer tools, and multiplayer systems by Connor Myers.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121613",
+  "theme_color": "#121613",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "64x64", "type": "image/png" }
+  ]
+}

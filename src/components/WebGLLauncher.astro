@@ -1,0 +1,181 @@
+---
+interface DemoConfig {
+  id: string;
+  shellUrl: string;
+  externalUrl: string;
+  download: string;
+  aspectRatio: string;
+  mobilePolicy: 'supported' | 'warn' | 'fallback';
+  permissions: string[];
+  fallbackDescription: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  demo: DemoConfig;
+}
+
+const { title, description, demo } = Astro.props;
+const allow = demo.permissions.join('; ');
+---
+
+<section
+  class="demo-launcher"
+  data-demo-launcher
+  data-demo-id={demo.id}
+  data-shell-url={demo.shellUrl}
+  data-title={title}
+  data-allow={allow}
+  style={`--demo-ratio: ${demo.aspectRatio}`}
+>
+  <div class="demo-poster" data-demo-poster>
+    <div class="demo-poster__art" aria-hidden="true">
+      <span class="orbital orbital--one"></span>
+      <span class="orbital orbital--two"></span>
+      <span class="orbital orbital--three"></span>
+      <span class="demo-poster__axis"></span>
+    </div>
+    <div class="demo-poster__content">
+      <span class="kicker">Interactive WebGL experiment</span>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <div class="demo-poster__facts" aria-label="Demo requirements">
+        <span>{demo.download} download</span>
+        <span>Desktop recommended</span>
+        <span>Loads on demand</span>
+      </div>
+      <div class="button-row">
+        <button class="button button--primary" type="button" data-demo-launch>Launch interactive demo</button>
+        <a class="button button--quiet" href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-stage" data-demo-stage hidden>
+    <div class="demo-stage__toolbar">
+      <div>
+        <strong>{title}</strong>
+        <span data-demo-status aria-live="polite">Preparing interactive demo…</span>
+      </div>
+      <div class="demo-stage__actions">
+        <button type="button" data-demo-fullscreen>Fullscreen</button>
+        <a href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
+        <button type="button" data-demo-unload>Return to project</button>
+      </div>
+    </div>
+    <div class="demo-stage__frame" data-demo-frame></div>
+    <div class="demo-error" data-demo-error hidden>
+      <strong>The interactive demo could not finish loading.</strong>
+      <p>Check your connection, try again, or open the standalone version in a new tab.</p>
+      <div class="button-row">
+        <button class="button button--primary" type="button" data-demo-retry>Try again</button>
+        <a class="button button--quiet" href={demo.externalUrl} target="_blank" rel="noreferrer">Open separately</a>
+      </div>
+    </div>
+  </div>
+  <noscript><p class="callout">JavaScript is required only to launch this interactive demo. {demo.fallbackDescription}</p></noscript>
+</section>
+
+<script>
+  type DemoMessage = {
+    type?: string;
+    demoId?: string;
+    progress?: number;
+    message?: string;
+  };
+
+  let activeLauncher: HTMLElement | null = null;
+
+  function setupLauncher(launcher: HTMLElement) {
+    if (launcher.dataset.initialized === 'true') return;
+    launcher.dataset.initialized = 'true';
+
+    const launchButton = launcher.querySelector<HTMLButtonElement>('[data-demo-launch]')!;
+    const poster = launcher.querySelector<HTMLElement>('[data-demo-poster]')!;
+    const stage = launcher.querySelector<HTMLElement>('[data-demo-stage]')!;
+    const frameHost = launcher.querySelector<HTMLElement>('[data-demo-frame]')!;
+    const status = launcher.querySelector<HTMLElement>('[data-demo-status]')!;
+    const error = launcher.querySelector<HTMLElement>('[data-demo-error]')!;
+    const unloadButton = launcher.querySelector<HTMLButtonElement>('[data-demo-unload]')!;
+    const fullscreenButton = launcher.querySelector<HTMLButtonElement>('[data-demo-fullscreen]')!;
+    const retryButton = launcher.querySelector<HTMLButtonElement>('[data-demo-retry]')!;
+    let timeout: number | undefined;
+
+    const unload = (returnFocus = true) => {
+      window.clearTimeout(timeout);
+      frameHost.replaceChildren();
+      error.hidden = true;
+      stage.hidden = true;
+      poster.hidden = false;
+      status.textContent = 'Preparing interactive demo…';
+      if (activeLauncher === launcher) activeLauncher = null;
+      if (returnFocus) launchButton.focus();
+    };
+
+    const fail = (message = 'The interactive demo could not finish loading.') => {
+      window.clearTimeout(timeout);
+      status.textContent = message;
+      error.hidden = false;
+    };
+
+    const launch = () => {
+      if (activeLauncher && activeLauncher !== launcher) {
+        activeLauncher.dispatchEvent(new CustomEvent('metater:unload-demo'));
+      }
+      activeLauncher = launcher;
+      poster.hidden = true;
+      stage.hidden = false;
+      error.hidden = true;
+      status.textContent = 'Downloading the Unity build…';
+
+      const iframe = document.createElement('iframe');
+      iframe.title = `${launcher.dataset.title} interactive Unity WebGL demo`;
+      iframe.loading = 'lazy';
+      iframe.allow = launcher.dataset.allow || 'fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.sandbox.add('allow-scripts', 'allow-same-origin');
+      iframe.src = launcher.dataset.shellUrl!;
+      frameHost.replaceChildren(iframe);
+      iframe.addEventListener('load', () => {
+        status.textContent = 'Starting the Unity runtime…';
+      }, { once: true });
+
+      timeout = window.setTimeout(() => fail('Loading is taking longer than expected.'), 45000);
+      stage.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    };
+
+    launchButton.addEventListener('click', launch);
+    unloadButton.addEventListener('click', () => unload());
+    retryButton.addEventListener('click', () => { unload(false); launch(); });
+    fullscreenButton.addEventListener('click', async () => {
+      try {
+        await frameHost.requestFullscreen();
+      } catch {
+        fail('Fullscreen is unavailable in this browser.');
+      }
+    });
+    launcher.addEventListener('metater:unload-demo', () => unload(false));
+
+    window.addEventListener('message', (event: MessageEvent<DemoMessage>) => {
+      const iframe = frameHost.querySelector('iframe');
+      if (!iframe || event.source !== iframe.contentWindow || event.origin !== window.location.origin) return;
+      if (event.data?.demoId !== launcher.dataset.demoId) return;
+
+      if (event.data.type === 'metater:demo:progress') {
+        const progress = Math.max(0, Math.min(100, Math.round((event.data.progress ?? 0) * 100)));
+        status.textContent = `Loading Unity… ${progress}%`;
+      }
+      if (event.data.type === 'metater:demo:ready') {
+        window.clearTimeout(timeout);
+        error.hidden = true;
+        status.textContent = 'Interactive demo ready';
+        iframe.focus();
+      }
+      if (event.data.type === 'metater:demo:error') fail(event.data.message);
+      if (event.data.type === 'metater:demo:request-exit') unload();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-demo-launcher]').forEach(setupLauncher);
+</script>

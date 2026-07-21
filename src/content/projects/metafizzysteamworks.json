@@ -1,0 +1,15 @@
+{
+  "title": "MetaFizzySteamworks",
+  "eyebrow": "Mirror networking transport",
+  "summary": "A focused rewrite of FizzySteamworks with modernized control over connection handling, logging, authentication, and server policy.",
+  "description": "MetaFizzySteamworks is a single-file alternative transport for Mirror projects that use Steam networking, built from the practical needs of shipping multiplayer games.",
+  "challenge": "Extend the established FizzySteamworks approach while making connection policy and operational behavior easier to control in a real project.",
+  "responsibilities": ["Transport rewrite", "Steam P2P integration", "Whitelist and blacklist controls", "Async connection and callback handling"],
+  "decisions": ["Keep adoption possible through one inspectable source file", "Separate trace, warning, and error logging", "Make server policy explicit", "Retain compatibility with Mirror's Transport contract"],
+  "outcomes": ["A reusable developer tool available as a public GitHub Gist", "Inspectable implementation without an additional package runtime"],
+  "technologies": ["C#", "Unity", "Mirror", "Steamworks"],
+  "links": [{ "label": "View source gist", "url": "https://gist.github.com/Metater/cfbf3209629cc7a14e3759265ea3b852" }],
+  "featured": true,
+  "order": 2
+}
+

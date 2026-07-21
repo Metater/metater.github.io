@@ -1,0 +1,29 @@
+---
+const path = Astro.url.pathname;
+const nav = [
+  { href: '/metavoicechat/', label: 'MetaVoiceChat' },
+  { href: '/steam/', label: 'Steam' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/contact/', label: 'Contact' }
+];
+
+const isActive = (href: string) => href !== '/' && path.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="site-header__inner shell">
+    <a class="wordmark" href="/" aria-label="Metater home">
+      <span class="wordmark__mark" aria-hidden="true">M</span>
+      <span>Metater</span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary navigation">
+      {nav.map((item, index) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+          <span class="primary-nav__number" aria-hidden="true">0{index + 1}</span>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+

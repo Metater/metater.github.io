@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="The requested page could not be found." noindex={true}>
+  <section class="hero">
+    <div class="shell">
+      <span class="kicker">404 / Not found</span>
+      <h1>This route ends here.</h1>
+      <p class="lead">The page may have moved, or the address may be incomplete.</p>
+      <div class="button-row"><a class="button button--primary" href="/">Return home</a><a class="button button--quiet" href="/portfolio/">Browse the portfolio</a></div>
+    </div>
+  </section>
+</BaseLayout>
+

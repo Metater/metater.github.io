@@ -1,0 +1,16 @@
+{
+  "title": "IM LOOPY FOR DOOP LOOPS!!!",
+  "summary": "A fast arcade action adventure about a cereal mascot, an endless appetite, and a mall full of throwable groceries.",
+  "status": "Released",
+  "releaseDate": "December 3, 2025",
+  "developer": "JakeHub, Metater",
+  "publisher": "Jatater Worldwide",
+  "roles": ["Developer credit — Metater", "Gameplay development", "Production collaboration"],
+  "steamUrl": "https://store.steampowered.com/app/2953840/IM_LOOPY_FOR_DOOP_LOOPS/",
+  "image": "/media/steam/doop-loops.jpg",
+  "imageAlt": "IM LOOPY FOR DOOP LOOPS!!! Steam header artwork",
+  "technologies": ["Unity", "Action adventure", "Steam"],
+  "metrics": [],
+  "order": 2
+}
+

@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity Web Player | CosmologyHypercone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="robots" content="noindex,follow">
+    <title>Hypercone Visualizer | Metater</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -25,6 +27,24 @@
     </div>
     <script>
       var canvas = document.querySelector("#unity-canvas");
+      var demoId = "hypercone-visualizer";
+      var unityInstanceReference = null;
+      var isEmbedded = window.parent !== window;
+
+      if (isEmbedded && new URLSearchParams(window.location.search).get("embed") === "1") {
+        document.body.classList.add("embed-mode");
+      }
+
+      function postDemoMessage(type, details) {
+        if (!isEmbedded) return;
+        window.parent.postMessage(Object.assign({ type: type, demoId: demoId }, details || {}), "*");
+      }
+
+      window.addEventListener("keydown", function(event) {
+        if (event.key === "Escape" && isEmbedded && !document.fullscreenElement) {
+          postDemoMessage("metater:demo:request-exit");
+        }
+      }, true);
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -49,6 +69,7 @@
           }, 5000);
         }
         updateBannerVisibility();
+        if (type === 'error') postDemoMessage("metater:demo:error", { message: String(msg) });
       }
 
       var buildUrl = "https://assets.metater.net/hypercone-visualizer/Build";
@@ -104,8 +125,8 @@
 
       } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        canvas.style.width = "960px";
-        canvas.style.height = "600px";
+        canvas.style.width = "100%";
+        canvas.style.height = "auto";
       }
 
       document.querySelector("#unity-loading-bar").style.display = "block";
@@ -115,16 +136,27 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
+          postDemoMessage("metater:demo:progress", { progress: progress });
               }).then((unityInstance) => {
+                unityInstanceReference = unityInstance;
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
 
+                postDemoMessage("metater:demo:ready");
+
               }).catch((message) => {
-                alert(message);
+                unityShowBanner(message, 'error');
+                postDemoMessage("metater:demo:error", { message: String(message) });
               });
             };
+
+      script.onerror = () => {
+        var message = "The Unity loader could not be downloaded.";
+        unityShowBanner(message, 'error');
+        postDemoMessage("metater:demo:error", { message: message });
+      };
 
       document.body.appendChild(script);
 

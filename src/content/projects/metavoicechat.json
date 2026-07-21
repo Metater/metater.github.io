@@ -1,0 +1,18 @@
+{
+  "title": "MetaVoiceChat",
+  "eyebrow": "Open-source Unity voice infrastructure",
+  "summary": "Self-contained proximity voice chat for Unity, designed to work with the networking stack a game already uses.",
+  "description": "MetaVoiceChat packages capture, Opus encoding, jitter-aware playback, optional noise suppression, and networking adapters into a modular Unity system.",
+  "challenge": "Give multiplayer Unity projects production-minded voice chat without forcing a separate hosted voice service or a single networking vendor.",
+  "responsibilities": ["System architecture and implementation", "Audio pipeline and latency compensation", "Networking integrations", "Documentation and developer support"],
+  "decisions": ["Keep the core network-agnostic", "Use pooled buffers to avoid routine runtime allocations", "Expose input, output, and filter extension points", "Ship concrete adapters for common Unity networking libraries"],
+  "outcomes": ["Games using MetaVoiceChat have reached more than six million players", "Supports Mirror, Netcode for GameObjects, FishNet, and Netick", "Open source under the MIT License"],
+  "technologies": ["Unity", "C#", "Opus", "Mirror", "FishNet", "Netcode for GameObjects", "Netick"],
+  "links": [{ "label": "Product page", "url": "/metavoicechat/" }, { "label": "GitHub", "url": "https://github.com/Metater/MetaVoiceChat" }],
+  "image": "/media/projects/metavoicechat.png",
+  "imageAlt": "MetaVoiceChat banner",
+  "featured": true,
+  "customPath": "/metavoicechat/",
+  "order": 1
+}
+

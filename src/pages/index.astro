@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((project) => project.data.featured);
+const personData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Connor Myers',
+  alternateName: 'Metater',
+  url: 'https://metater.net',
+  sameAs: ['https://github.com/Metater'],
+  knowsAbout: ['Unity', 'Multiplayer games', 'Voice over IP', 'Networking systems']
+};
+---
+
+<BaseLayout
+  title="Metater"
+  description="Games, developer tools, and multiplayer systems by Connor Myers — creator of MetaVoiceChat and developer of shipped Steam games."
+  structuredData={personData}
+>
+  <section class="hero">
+    <div class="shell">
+      <div class="hero__eyebrow"><span class="kicker">Independent games & software</span><span>Connor Myers</span></div>
+      <div class="hero__grid">
+        <div>
+          <h1 class="hero__title">Metater<span class="hero__name">Games with a technical point of view.</span></h1>
+          <p class="lead">I build multiplayer games, reusable Unity systems, and developer tools—then take them far enough to ship.</p>
+          <div class="button-row">
+            <a class="button button--primary" href="/metavoicechat/">Explore MetaVoiceChat</a>
+            <a class="button button--quiet" href="/portfolio/">View selected work</a>
+          </div>
+        </div>
+        <aside class="hero__aside" aria-label="Professional summary">
+          <span class="meta-label">Profile / 2026</span>
+          <p>Connor Myers is a software engineer and game developer focused on Unity, networking, voice systems, and unusual multiplayer mechanics.</p>
+          <p>Metater is the home for that work.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-band" aria-labelledby="reach-heading">
+    <div class="shell proof-band__inner">
+      <div class="proof-band__metric">
+        <span class="kicker">Known player reach</span>
+        <strong>6M+</strong>
+      </div>
+      <div class="proof-band__copy">
+        <h2 id="reach-heading">Voice infrastructure in games people play.</h2>
+        <p class="lead">Games using MetaVoiceChat have reached more than six million players across known releases and demos.</p>
+        <p>Aggregate creator-supplied reach, rounded by title as of July 2026. It represents the audience of selected games using the system—not package downloads or active users.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">01 / Start here</span>
+          <h2 class="section-title">Three sides of the work.</h2>
+        </div>
+        <p>Products for players, infrastructure for developers, and case studies for the engineering behind both.</p>
+      </div>
+      <div class="path-grid">
+        <a class="path-card" href="/metavoicechat/">
+          <span class="path-card__index">01 — Flagship</span>
+          <h3>MetaVoiceChat</h3>
+          <p>Open-source, network-agnostic voice chat for Unity multiplayer games.</p>
+        </a>
+        <a class="path-card" href="/steam/">
+          <span class="path-card__index">02 — Products</span>
+          <h3>Steam games</h3>
+          <p>Released collaborations, experiments in progress, and multiplayer chaos.</p>
+        </a>
+        <a class="path-card" href="/portfolio/">
+          <span class="path-card__index">03 — Engineering</span>
+          <h3>Selected work</h3>
+          <p>Networking systems, developer tools, interactive experiments, and technical decisions.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <div>
+          <span class="section-number">02 / Selected work</span>
+          <h2 class="section-title">Built to be used.</h2>
+        </div>
+        <p>Each project is presented through its problem, constraints, implementation, and result—not just a technology list.</p>
+      </div>
+      <div class="media-card-grid">
+        {featured.map((project) => {
+          const href = project.data.customPath ?? `/portfolio/${project.id}/`;
+          return (
+            <article class="media-card">
+              {project.data.image && (
+                <div class="media-card__image"><img src={project.data.image} alt={project.data.imageAlt ?? ''} width="1200" height="630" loading="lazy" /></div>
+              )}
+              <div class="media-card__body">
+                <div class="media-card__meta"><span>{project.data.eyebrow}</span><span>0{project.data.order}</span></div>
+                <h3><a href={href}>{project.data.title}</a></h3>
+                <p>{project.data.summary}</p>
+                <ul class="tag-list">{project.data.technologies.slice(0, 4).map((tag) => <li>{tag}</li>)}</ul>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="shell contact-grid">
+      <div>
+        <span class="section-number">03 / Connor Myers</span>
+        <h2>Games, systems, and the space between them.</h2>
+      </div>
+      <div>
+        <p class="lead">My work tends to begin where a game idea meets a difficult systems problem: networking, voice, simulation, tooling, or deployment.</p>
+        <p>I care about the parts players feel and the infrastructure developers have to live with afterward.</p>
+        <a class="button button--quiet" href="/contact/">Contact Connor</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

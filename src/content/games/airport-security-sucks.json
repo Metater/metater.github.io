@@ -1,0 +1,19 @@
+{
+  "title": "Airport Security Sucks!",
+  "summary": "A multiplayer airport security game about spotting smugglers hiding in a crowd, controlling travelers with voice commands, and embracing procedural chaos.",
+  "status": "Released",
+  "releaseDate": "June 5, 2026",
+  "developer": "JakeHub, Metater",
+  "publisher": "Jatater Worldwide",
+  "roles": ["Developer credit — Metater", "Multiplayer systems", "Voice-driven gameplay"],
+  "steamUrl": "https://store.steampowered.com/app/4285690/",
+  "image": "/media/steam/airport-security.jpg",
+  "imageAlt": "Airport Security Sucks! Steam capsule artwork",
+  "technologies": ["Unity", "Multiplayer", "Voice control", "MetaVoiceChat"],
+  "metrics": [
+    { "value": "70K+", "label": "full-game players", "asOf": "July 2026", "sourceUrl": "https://store.steampowered.com/app/4285690/", "note": "Creator-supplied reach figure." },
+    { "value": "782K+", "label": "demo players", "asOf": "July 2026", "sourceUrl": "https://store.steampowered.com/app/4362800/Airport_Security_Sucks_Demo/", "note": "Creator-supplied reach figure." }
+  ],
+  "order": 1
+}
+
